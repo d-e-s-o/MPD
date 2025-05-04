@@ -21,6 +21,9 @@
 #include "Outputs.hxx"
 #include "Idle.hxx"
 #include "song/DetachedSong.hxx"
+#include "Main.hxx"
+#include "Instance.hxx"
+#include "StateFile.hxx"
 
 #include <algorithm>
 
@@ -64,6 +67,7 @@ PlayerControl::Play(std::unique_ptr<DetachedSong> song)
 
 	assert(song != nullptr);
 
+  {
 	const std::lock_guard<Mutex> protect(mutex);
 	SeekLocked(std::move(song), SongTime::zero());
 
@@ -71,6 +75,9 @@ PlayerControl::Play(std::unique_ptr<DetachedSong> song)
 		/* if the player was paused previously, we need to
 		   unpause it */
 		PauseLocked();
+  }
+
+  instance->state_file->Write();
 }
 
 void
