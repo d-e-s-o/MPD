@@ -22,6 +22,8 @@
 #include "Idle.hxx"
 #include "Song.hxx"
 #include "DecoderControl.hxx"
+#include "Main.hxx"
+#include "StateFile.hxx"
 
 #include <cmath>
 
@@ -140,6 +142,8 @@ PlayerControl::SetPause(bool pause_flag)
 	}
 
 	Unlock();
+
+  state_file->Write();
 }
 
 void

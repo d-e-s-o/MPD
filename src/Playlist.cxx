@@ -25,6 +25,8 @@
 #include "tag/Tag.hxx"
 #include "Idle.hxx"
 #include "Log.hxx"
+#include "Main.hxx"
+#include "StateFile.hxx"
 
 #include <assert.h>
 
@@ -147,6 +149,8 @@ playlist::UpdateQueuedSong(PlayerControl &pc, const Song *prev)
 		else
 			queued = next_order;
 	}
+
+  state_file->Write();
 }
 
 void

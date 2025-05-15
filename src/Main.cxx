@@ -104,7 +104,7 @@ EventLoop *main_loop;
 
 Instance *instance;
 
-static StateFile *state_file;
+StateFile *state_file;
 
 static bool
 glue_daemonize_init(const struct options *options, Error &error)

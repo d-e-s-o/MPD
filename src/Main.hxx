@@ -23,12 +23,15 @@
 class ThreadId;
 class EventLoop;
 struct Instance;
+struct StateFile;
 
 extern ThreadId main_thread;
 
 extern EventLoop *main_loop;
 
 extern Instance *instance;
+
+extern StateFile *state_file;
 
 /**
  * A entry point for application.
