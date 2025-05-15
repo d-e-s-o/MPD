@@ -24,6 +24,9 @@
 #include "song/DetachedSong.hxx"
 #include "SingleMode.hxx"
 #include "Log.hxx"
+#include "Main.hxx"
+#include "Instance.hxx"
+#include "StateFile.hxx"
 
 #include <assert.h>
 
@@ -85,6 +88,8 @@ playlist::SongStarted()
 	/* reset a song's "priority" when playback starts */
 	if (queue.SetPriority(queue.OrderToPosition(current), 0, -1, false))
 		OnModified();
+
+  instance->state_file->Write();
 }
 
 inline void

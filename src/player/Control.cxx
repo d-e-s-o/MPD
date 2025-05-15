@@ -21,6 +21,9 @@
 #include "Outputs.hxx"
 #include "Idle.hxx"
 #include "song/DetachedSong.hxx"
+#include "Main.hxx"
+#include "Instance.hxx"
+#include "StateFile.hxx"
 
 #include <algorithm>
 
@@ -137,6 +140,7 @@ PlayerControl::LockSetPause(bool pause_flag) noexcept
 	if (!thread.IsDefined())
 		return;
 
+  {
 	const std::lock_guard<Mutex> protect(mutex);
 
 	switch (state) {
@@ -153,6 +157,8 @@ PlayerControl::LockSetPause(bool pause_flag) noexcept
 			PauseLocked();
 		break;
 	}
+  }
+  instance->state_file->Write();
 }
 
 void
